@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_12_011910) do
+ActiveRecord::Schema.define(version: 2021_11_12_004021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "game_reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.integer "rating"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_id"], name: "index_game_reviews_on_game_id"
+    t.index ["user_id"], name: "index_game_reviews_on_user_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -45,6 +56,16 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.string "player_count"
     t.string "category"
     t.integer "duration"
+  end
+
+  create_table "lobbies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "session_id", null: false
+    t.boolean "available"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_lobbies_on_session_id"
+    t.index ["user_id"], name: "index_lobbies_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -62,6 +83,21 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "session_name"
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.index ["game_id"], name: "index_sessions_on_game_id"
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "user_reviews", force: :cascade do |t|
+    t.bigint "recepient_id", null: false
+    t.bigint "author_id", null: false
+    t.integer "rating"
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_user_reviews_on_author_id"
+    t.index ["recepient_id"], name: "index_user_reviews_on_recepient_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,4 +120,10 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "game_reviews", "games"
+  add_foreign_key "game_reviews", "users"
+  add_foreign_key "lobbies", "sessions"
+  add_foreign_key "lobbies", "users"
+  add_foreign_key "sessions", "games"
+  add_foreign_key "sessions", "users"
 end
