@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_231522) do
+ActiveRecord::Schema.define(version: 2021_11_12_011910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,23 @@ ActiveRecord::Schema.define(version: 2021_11_11_231522) do
     t.integer "duration"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.date "date"
+    t.time "time"
+    t.string "address"
+    t.float "latitute"
+    t.float "longitude"
+    t.boolean "is_smoke_free"
+    t.boolean "is_family_friendly"
+    t.boolean "has_drinks"
+    t.boolean "has_food"
+    t.integer "capacity"
+    t.string "is_recurrent_boolean"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "session_name"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -61,6 +78,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_231522) do
     t.string "address"
     t.integer "age"
     t.string "gender"
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
