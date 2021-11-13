@@ -1,17 +1,15 @@
 class GamesController < ApplicationController
-  before_action :set_and_authorize_game, except: %i[index new create]
+  before_action :set_game, except: %i[index new create]
   def index
     @games = policy_scope(Game).order(created_at: :desc)
   end
 
   def new
     @game = Game.new
-    authorize @game
   end
 
   def create
     @game = Game.new(game_params)
-    authorize @game
     if @game.save
       redirect_to games_path
     else
@@ -34,9 +32,8 @@ class GamesController < ApplicationController
 
   private
 
-  def set_and_authorize_game
+  def set_game
     @game = Game.find(params[:id])
-    authorize @game
   end
 
   def game_params
