@@ -1,0 +1,9 @@
+<div class="container">
+  <% @games.each do |game| %>
+    <div class="card">
+      <%= game.name %>
+      <%= game.description %>
+      <%= game.player_count %>
+    </div>
+  <% end %>
+</div>

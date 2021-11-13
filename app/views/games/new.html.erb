@@ -1,0 +1,14 @@
+<div class="form-new row justify-content-center">
+  <div class="col-6">
+    <h3>Add a game</h3>
+    <%= simple_form_for @game do |f| %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :age_rating %>
+      <%= f.input :player_count %>
+      <%= f.input :category %>
+      <%= f.input :duration %>
+      <%= f.submit "Add game", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
