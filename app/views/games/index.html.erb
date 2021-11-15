@@ -6,8 +6,9 @@
       <% else %>
       <% end %>
       <div class="d-flex flex-column">
-        <div class="p-2"><%= game.name %></div>
+        <div class="p-2"><h1><%= game.name %></h1></div>
         <div class="p-2"><%= game.description %></div>
+        <div class="p-2">Age rating: <%= game.age_rating %>+</div>
         <div class="p-2">Time: <%= game.duration %></div>
         <div class="p-2">Player count: <%= game.player_count %></div>
       </div>
