@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :user_reviews, foreign_key: :recepient_id, dependent: :destroy
   has_many :game_reviews, dependent: :destroy
   has_many :lobbies, dependent: :destroy
-  has_many :sessions, dependent: :destroy
+  has_many :game_sessions, dependent: :destroy
   has_one_attached :photo
 end

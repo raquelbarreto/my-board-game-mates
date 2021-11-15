@@ -47,28 +47,7 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.index ["user_id"], name: "index_game_reviews_on_user_id"
   end
 
-  create_table "games", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "name"
-    t.text "description"
-    t.integer "age_rating"
-    t.string "player_count"
-    t.string "category"
-    t.integer "duration"
-  end
-
-  create_table "lobbies", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "session_id", null: false
-    t.boolean "available"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["session_id"], name: "index_lobbies_on_session_id"
-    t.index ["user_id"], name: "index_lobbies_on_user_id"
-  end
-
-  create_table "sessions", force: :cascade do |t|
+  create_table "game_sessions", force: :cascade do |t|
     t.date "date"
     t.time "time"
     t.string "address"
@@ -85,8 +64,29 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.string "session_name"
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
-    t.index ["game_id"], name: "index_sessions_on_game_id"
-    t.index ["user_id"], name: "index_sessions_on_user_id"
+    t.index ["game_id"], name: "index_game_sessions_on_game_id"
+    t.index ["user_id"], name: "index_game_sessions_on_user_id"
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "name"
+    t.text "description"
+    t.integer "age_rating"
+    t.string "player_count"
+    t.string "category"
+    t.integer "duration"
+  end
+
+  create_table "lobbies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "game_session_id", null: false
+    t.boolean "available"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["game_session_id"], name: "index_lobbies_on_game_session_id"
+    t.index ["user_id"], name: "index_lobbies_on_user_id"
   end
 
   create_table "user_reviews", force: :cascade do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
     t.string "address"
     t.integer "age"
     t.string "gender"
-    t.boolean "admin"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 2021_11_12_011910) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "game_reviews", "games"
   add_foreign_key "game_reviews", "users"
-  add_foreign_key "lobbies", "sessions"
+  add_foreign_key "game_sessions", "games"
+  add_foreign_key "game_sessions", "users"
+  add_foreign_key "lobbies", "game_sessions"
   add_foreign_key "lobbies", "users"
-  add_foreign_key "sessions", "games"
-  add_foreign_key "sessions", "users"
 end

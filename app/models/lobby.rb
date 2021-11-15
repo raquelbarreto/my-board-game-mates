@@ -1,4 +1,4 @@
 class Lobby < ApplicationRecord
   belongs_to :user
-  belongs_to :session
+  belongs_to :game_session
 end

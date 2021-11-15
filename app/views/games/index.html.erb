@@ -1,9 +1,16 @@
 <div class="container">
   <% @games.each do |game| %>
-    <div class="card">
-      <%= game.name %>
-      <%= game.description %>
-      <%= game.player_count %>
+    <div class="card d-flex flex-row">
+      <% if game.photo.attached? %>
+        <%= cl_image_tag game.photo.key, height: 300, width: 400, crop: :fill %>
+      <% else %>
+      <% end %>
+      <div class="d-flex flex-column">
+        <div class="p-2"><%= game.name %></div>
+        <div class="p-2"><%= game.description %></div>
+        <div class="p-2">Time: <%= game.duration %></div>
+        <div class="p-2">Player count: <%= game.player_count %></div>
+      </div>
     </div>
   <% end %>
 </div>

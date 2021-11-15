@@ -4,7 +4,7 @@ Faker::Config.locale = 'en-GB'
 
 User.destroy_all
 Game.destroy_all
-Session.destroy_all
+GameSession.destroy_all
 UserReview.destroy_all
 GameReview.destroy_all
 
@@ -127,7 +127,7 @@ ticket_to_ride.photo.attach(io: file, filename: 'ticket_to_ride.jpg', content_ty
   user = User.find(User.pluck(:id).sample)
   game = Game.find(Game.pluck(:id).sample)
   apostrophe = user.first_name.end_with?("s") ? "'" : "'s"
-  Session.create!(
+  GameSession.create!(
     session_name: "#{user.first_name}#{apostrophe} #{game.name} night!",
     user: user,
     game: game,
