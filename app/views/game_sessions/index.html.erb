@@ -1,12 +1,12 @@
 <div class="container">
   <% @game_sessions.each do |game_session| %>
-    <div class="card">
-      <% if game_session.photo.attached? %>
-          <%= cl_image_tag game_session.photo.key, height: 300, width: 400, crop: :fill %>
-      <% else %>
-      <% end %>
-      <%= link_to game_session.session_name, game_session_path(game_session.id) %>
-      <%= game_session.address %>
+    <div class="card d-flex">
+      <%= cl_image_tag game_session.game.photo.key, height: 300, width: 300, crop: :fill %>
+      <div class="d-flex flex-column">
+        <div class="p-2"><%= link_to game_session.session_name, game_session_path(game_session.id) %></div>
+        <div class="p-2">What are we playing? <%= game_session.game.name %></div>
+        <div class="p-2">Where? <%= game_session.address  %></div>
+      </div>
 
       <% if policy(game_session).destroy? %>
         <%= link_to game_session_path(game_session), method: :delete, data: { confirm: "Are you sure you want to delete this offer?" } do %>
