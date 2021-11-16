@@ -1,0 +1,3 @@
+<%= cl_image_tag @game_session.game.photo.key, height: 300, width: 400, crop: :fill %>
+<%= @game_session.session_name %>
+<%= link_to "Ask to join", "#", class: "btn btn-primary" %>

@@ -1,8 +1,10 @@
 <div class="form-new row justify-content-center">
   <div class="col-6">
     <h3>Add a session</h3>
-    <%= simple_form_for @session do |f| %>
+    <%= simple_form_for @game_session do |f| %>
+      <%= f.input :game_id, collection: Game.all %>
       <%= f.input :session_name %>
+      <%= f.input :address %>
       <%= f.input :photo, as: :file %>
       <%= f.submit "Create session", class: "btn btn-primary" %>
     <% end %>
