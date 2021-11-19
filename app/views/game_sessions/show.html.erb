@@ -1,3 +1,19 @@
-<%= cl_image_tag @game_session.game.photo.key, height: 300, width: 400, crop: :fill %>
-<%= @game_session.session_name %>
-<%= link_to "Ask to join", "#", class: "btn btn-primary" %>
+<div class="container">
+  <% if @game_session.photo.attached? %>
+    <%= cl_image_tag @game_session.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+  <% end %>
+  <h2 style="align-self:center;"><%= @game_session.session_name %></h2>
+
+  <div class="col-6 form pb-4">
+    <% if current_user.lobbies.where(game_session: @game_session).empty? %>
+      <%= simple_form_for [@game_session, @lobby] do |f| %>
+      <%= f.submit "Ask to join", class: "btn btn-flat" %>
+      <% end %>
+    <% else %>
+      <%= link_to game_session_lobby_path(@game_session, @lobby), method: :delete, data: { confirm: "Are you sure you want to leave this game session?" } do %>
+        <button class = 'btn btn-flat'>Leave</button>
+      <% end %>
+    <% end %>
+  </div>
+</div>
