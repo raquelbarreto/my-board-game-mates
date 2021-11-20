@@ -155,6 +155,7 @@ games.each do |game|
       user: user,
       game: game,
       rating: rand(1..5),
+      title:  "#{game.name}'s review",
       content: Faker::Restaurant.review
     )
   end
@@ -169,7 +170,8 @@ users.each do |user|
       recepient: user,
       author: User.where("id != #{user.id}").sample,
       rating: rand(1..5),
-      content: Faker::Restaurant.review
+      content: Faker::Restaurant.review,
+      title: "#{user.first_name} impressions"
     )
   end
 end
