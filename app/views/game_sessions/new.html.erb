@@ -5,7 +5,16 @@
       <%= f.input :game_id, collection: Game.all %>
       <%= f.input :session_name %>
       <%= f.input :address %>
+      <%= f.input :date, as: :date %>
+      <%= f.input :time, as: :time %>
       <%= f.input :photo, as: :file %>
+      <%= f.input :is_family_friendly, :label => "Family Friendly"%>
+      <%= f.input :is_smoke_free, :label => "Smoke free"%>
+      <%= f.input :has_food, :label => "Food" %>
+      <%= f.input :has_drinks, :label => "Drinks" %>
+      <%= f.input :capacity, :label => "Spaces available" %>
+      <%= f.input :is_recurrent_boolean, collection: ["Yes", "No"], :label => "Will this session be recurrent?" %>
+
       <%= f.submit "Create session", class: "btn btn-primary" %>
     <% end %>
   </div>
