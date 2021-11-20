@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_224519) do
+ActiveRecord::Schema.define(version: 2021_11_20_144627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_224519) do
     t.boolean "has_drinks"
     t.boolean "has_food"
     t.integer "capacity"
-    t.string "is_recurrent_boolean"
+    t.boolean "is_recurrent"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "session_name"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_224519) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.text "description"
-    t.integer "age_rating"
+    t.string "age_rating"
     t.string "player_count"
     t.string "category"
     t.integer "duration"

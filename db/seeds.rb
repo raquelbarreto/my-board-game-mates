@@ -23,7 +23,7 @@ GameReview.destroy_all
     first_name: first_name,
     last_name: last_name,
     address: Faker::Address.full_address,
-    age: [18..80].sample,
+    age: rand(18..80),
     gender: gender
   )
   user.photo.attach(io: file, filename: 'user_avatar.jpg', content_type: 'image/jpg')
@@ -68,7 +68,7 @@ betrayal_hill.photo.attach(io: file, filename: 'betrayal_hill.jpg', content_type
 file = File.open("app/assets/images/games/carcassone.jpg")
 carcassone = Game.create!(
   name: "Carcassone",
-  description: "Carcassonne is a tile-placement game in which the players draw and place a tile with a piece of southern French landscape on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, etcetera. Having placed a tile, the player can then decide to place one of their meeples on one of the areas on it: on the city as a knight, on the road as a robber, on a cloister as a monk, or on the grass as a farmer. When that area is complete, that meeple scores points for its owner.",
+  description: "Carcassonne is a tile-placement game in which the players draw and place a tile with a piece of southern French landscape on it. The tile might feature a city, a road, a cloister, grassland or some combination thereof, and it must be placed adjacent to tiles that have already been played, in such a way that cities are connected to cities, roads to roads, etcetera.",
   age_rating: "7+",
   player_count: 5,
   category: "Strategy",
@@ -139,7 +139,7 @@ ticket_to_ride.photo.attach(io: file, filename: 'ticket_to_ride.jpg', content_ty
     has_drinks: [true, false].sample,
     has_food: [true, false].sample,
     capacity: game.player_count,
-    is_recurrent_boolean: [true, false].sample
+    is_recurrent: [true, false].sample
   )
 end
 
@@ -151,7 +151,7 @@ games.each do |game|
   GameReview.create!(
     user: user,
     game: game,
-    rating: [0..5].sample,
+    rating: rand(1..5),
     content: Faker::Restaurant.review
   )
 end
@@ -164,7 +164,7 @@ users.each do |user|
     UserReview.create!(
       recepient: user,
       author: User.where("id != #{user.id}").sample,
-      rating: [0..5].sample,
+      rating: rand(1..5),
       content: Faker::Restaurant.review
     )
   end
