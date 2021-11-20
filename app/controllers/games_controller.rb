@@ -14,8 +14,8 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game_reviews = GameReview.where(game: @game)
     authorize @game
+    @game_reviews = GameReview.where(game: @game)
   end
 
   def create

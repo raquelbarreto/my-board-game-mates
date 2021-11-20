@@ -147,13 +147,15 @@ end
 games = Game.all
 
 games.each do |game|
-  user = User.find(User.pluck(:id).sample)
-  GameReview.create!(
-    user: user,
-    game: game,
-    rating: rand(1..5),
-    content: Faker::Restaurant.review
-  )
+  5.times do
+    user = User.find(User.pluck(:id).sample)
+    GameReview.create!(
+      user: user,
+      game: game,
+      rating: rand(1..5),
+      content: Faker::Restaurant.review
+    )
+  end
 end
 
 # For each user, create 5 revies
