@@ -1,0 +1,11 @@
+<%= @game.name %>
+
+<% @game_reviews.each do |review| %>
+  <%= review.user.first_name %>
+  <%= review.rating %>
+  <%= review.content %>
+<% end %>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %> |
+<%= link_to 'Leave a review', new_game_game_review_path(@game) %>
