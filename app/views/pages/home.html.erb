@@ -1,2 +1,32 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" >
+  <div class="container">
+    <h1>Find your <strong>board game</strong> mates.</h1>
+    <p>Join a session, meet people and make friends!</p>
+    <%= link_to "Start", game_sessions_path, class: "btn btn-flat" %>
+  </div>
+</div>
+
+<div class="container">
+  <div class="how-it-works">
+    <h3>How does it work</h1>
+    <div class="cards">
+      <div class="card">
+        <p>Search by location and find sessions near you. There are players all over the world! </p>
+        <%= link_to "Find session", game_sessions_path, class: "btn btn-flat" %>
+      </div>
+      <div class="card">
+        <p>Not sure what games would you like to play? Explore the board games world here.</p>
+        <%= link_to "Discover games", games_path, class: "btn btn-flat" %>
+      </div>
+      <div class="card">
+        <p>Own some board games but need a group to play? Start you own game session. </p>
+        <%= link_to "Create a session", new_game_session_path, class: "btn btn-flat" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="complete-perfil">
+    <h3>Complete your profile and keep playing</h1>
+    <p>Complete your profile to keep playing. <br> You can also check other peoples profiles and rate your experience with them. </p>
+  </div>
+</div>

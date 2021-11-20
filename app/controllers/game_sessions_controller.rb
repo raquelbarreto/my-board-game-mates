@@ -30,6 +30,8 @@ class GameSessionsController < ApplicationController
 
   def show
     @game_session = GameSession.find(params[:id])
+    @user = current_user
+    @lobby = @user.lobbies.where(game_session: @game_session).first || Lobby.new
     authorize @game_session
   end
 

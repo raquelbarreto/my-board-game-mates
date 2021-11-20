@@ -1,7 +1,12 @@
 class GamesController < ApplicationController
   before_action :set_game, except: %i[index new create]
   def index
-    @games = policy_scope(Game).order(created_at: :desc)
+    if params[:query].present?
+      @games = policy_scope(Game).where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @games = policy_scope(Game).order(created_at: :desc)
+    end
+    # @games = policy_scope(Game).order(created_at: :desc)
   end
 
   def new
