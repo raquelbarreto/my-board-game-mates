@@ -1,29 +1,31 @@
 <div class="container">
-  <%= link_to "See sessions", game_sessions_path, class: "btn btn-flat"  %>
 
-  <%= form_tag games_path, method: :get do %>
-  <%= text_field_tag :query,
-    params[:query],
-    class: "form-control",
-    placeholder: "Find a game"
-  %>
-  <%= submit_tag "Search", class: "btn btn-flat" %>
-  <% end %>
+  <div class="search">
+    <%= form_tag games_path, method: :get do %>
+    <%= text_field_tag :query,
+      params[:query],
+      class: "form-control",
+      placeholder: "Find a game"
+    %>
+    <%= submit_tag "Search", class: "btn btn-flat" %>
+    <% end %>
+  </div>
 
-  <% @games.each do |game| %>
-    <div class="card d-flex flex-row">
-      <% if game.photo.attached? %>
-        <%= cl_image_tag game.photo.key, height: 300, width: 400, crop: :fill %>
-      <% else %>
-      <% end %>
-      <div class="d-flex flex-column">
-        <div class="p-2"><h1><%= game.name %></h1></div>
-        <div class="p-2"><%= game.description %></div>
-        <div class="p-2">Category: <%= game.category %></div>
-        <div class="p-2">Age rating: <%= game.age_rating %>+</div>
-        <div class="p-2">Time: <%= game.duration %></div>
-        <div class="p-2">Player count: <%= game.player_count %></div>
+  <div class="cards">
+    <% @games.each do |game| %>
+      <div class="card">
+        <div class="game-img">
+          <% if game.photo.attached? %>
+            <%= cl_image_tag game.photo.key, height: 300, width: 400, crop: :fill %>
+          <% else %>
+          <% end %>
+        </div>
+        <div class="game-info">
+          <div class="p-2"><h4><%= game.name %></h4></div>
+          <div class="p-2">Category: <%= game.category %></div>
+          <div class="p-2"> <%= link_to "See this game", game_path(game.id), class: "btn btn-details" %></div>
+        </div>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
