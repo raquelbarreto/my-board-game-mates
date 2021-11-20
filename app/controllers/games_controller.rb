@@ -13,6 +13,11 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def show
+    @game_reviews = GameReview.where(game: @game)
+    authorize @game
+  end
+
   def create
     @game = Game.new(game_params)
     if @game.save
