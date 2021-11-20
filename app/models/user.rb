@@ -16,6 +16,6 @@ class User < ApplicationRecord
   # Validations
   validates :first_name, :last_name, :age, presence: true
   validates :age, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  validates :gender, inclusion: { in: %w[M F Other] }
+  validates :gender, inclusion: { in: %w[m f other] }
 
 end
