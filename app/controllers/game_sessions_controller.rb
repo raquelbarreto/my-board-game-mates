@@ -1,6 +1,15 @@
 class GameSessionsController < ApplicationController
   def index
     @game_sessions = policy_scope(GameSession).order(created_at: :desc)
+
+    @markers = @game_sessions.geocoded.map do |game_session|
+      {
+        lat: game_session.latitude,
+        lng: game_session.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { game_session: game_session }),
+        image_url: helpers.asset_url('marker')
+      }
+    end
   end
 
   def new
