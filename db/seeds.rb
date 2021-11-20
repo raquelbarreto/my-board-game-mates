@@ -15,6 +15,8 @@ GameReview.destroy_all
   first_name = gender == 'm' ? Faker::Name.male_first_name : Faker::Name.female_first_name
   last_name = Faker::Name.last_name
 
+  address = "SQS #{rand(1..3)}0#{rand(1..9)} Bloco #{Array('B'..'D').sample}, Brasília"
+
   user = User.create!(
     email: "teste#{i + 1}@example.com",
     password: 123123,
@@ -22,7 +24,7 @@ GameReview.destroy_all
     about_me: Faker::TvShows::MichaelScott.quote,
     first_name: first_name,
     last_name: last_name,
-    address: Faker::Address.full_address,
+    address: address,
     age: rand(18..80),
     gender: gender
   )
