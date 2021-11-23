@@ -1,0 +1,26 @@
+.btn-flat {
+  color: white;
+  padding: 8px 24px;
+  border-radius: $border-radius;
+  background: $orange;
+  transition: background 0.3s ease;
+}
+
+.btn-flat:hover {
+  background: #fa7046;
+  color: white;
+}
+
+.btn-details {
+  background-color: transparent;
+  color: $orange;
+  border-radius: $border-radius;
+  border: 1px solid $orange;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.btn-details:hover {
+  background: #fa7046;
+  color: white;
+}

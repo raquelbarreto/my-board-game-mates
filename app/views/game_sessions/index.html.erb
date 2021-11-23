@@ -1,14 +1,8 @@
 <div class="container">
-  <div id="map" class="round-border"
-      style="width: 100%; height: 600px;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-  </div>
-
-  <div class="container">
-    <div class="session-cards">
+  <div class="d-flex">
+    <div class="d-flex flex-column">
       <% @game_sessions.each do |game_session| %>
-        <div class="card d-flex">
+        <div class="session-card d-flex flex-row">
           <% if game_session.photo.attached? %>
             <%= cl_image_tag game_session.photo.key, height: 300, width: 300, crop: :fill %>
           <% else %>
@@ -18,6 +12,7 @@
             <div class="p-2"><%= link_to game_session.session_name, game_session_path(game_session.id) %></div>
             <div class="p-2">What are we playing? <%= game_session.game.name %></div>
             <div class="p-2">Where? <%= game_session.address  %></div>
+            <div class="p-2">Spaces available: <%= game_session.capacity  %></div>
           </div>
 
           <% if policy(game_session).destroy? %>
@@ -27,6 +22,11 @@
           <% end %>
         </div>
       <% end %>
+    </div>
+    <div id="map" class="round-border"
+        style="width: 100%; height: 600px;"
+        data-markers="<%= @markers.to_json %>"
+        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
     </div>
   </div>
 </div>
