@@ -4,5 +4,5 @@ class Lobby < ApplicationRecord
   belongs_to :game_session
 
   # Validations
-  validates :available, inclusion: [true, false]
+  # validates :available, inclusion: [true, false]
 end

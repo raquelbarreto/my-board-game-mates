@@ -1,0 +1,24 @@
+.card {
+  width: 250px;
+  border-radius: 16px;
+  box-shadow: 0 0 5px rgb(230,230,230);
+  text-align: center;
+  // padding: 20px;
+  border: 1px solid rgb(230,230,230);
+}
+
+.session-card {
+  box-shadow: 0 0 5px rgb(230,230,230);
+  text-align: left;
+  // padding: 20px;
+  border: 1px solid rgb(230,230,230);
+  margin-bottom: 16px;
+  margin-right: 16px;
+  width: 700px;
+}
+
+.game-img {
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}

@@ -7,8 +7,7 @@ class GameSession < ApplicationRecord
   has_many :users, through: :lobbies, dependent: :destroy
 
   # Validations
-  validates :is_smoke_free, :is_family_friendly, :has_drinks, :has_food,
-            :is_recurrent, inclusion: { in: [true, false] }
+  validates :is_smoke_free, :is_family_friendly, :has_drinks, :has_food, :is_recurrent, inclusion: { in: [true, false] }
 
   validates :date, :time, :address, :capacity, :session_name, presence: true
   # Geocoding
