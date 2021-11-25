@@ -11,7 +11,7 @@ class CreateGameSessions < ActiveRecord::Migration[6.0]
       t.boolean :has_drinks, null: false
       t.boolean :has_food, null: false
       t.integer :capacity
-      t.string :is_recurrent
+      t.string :is_recurrent_boolean
 
       t.timestamps
     end
