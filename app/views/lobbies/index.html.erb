@@ -1,0 +1,26 @@
+<div class="container">
+  <% if @lobbies.empty? %>
+    <h3>Bummer! It doesn't seem that you have any session <strong>yet</strong>.</h3>
+    <%= link_to 'Find Session!', game_sessions_path, class: "btn btn-flat" %>
+  <% else %>
+
+
+    <h3 class="mt-4">Hi, <%= @lobbies.first.user.first_name %>!  These are your sessions:</h3>
+
+      <% @lobbies.each do |lobby| %>
+
+              <% if lobby.game_session.photo.attached? %>
+                <%= cl_image_tag lobby.game_session.photo.key, height: 300, width: 400, crop: :fill %>
+              <% else %>
+              <% end %>
+
+              <h2><%= lobbie.game_session..make %> <%= booking.offer.car.car_model %></h2>
+              <p>From <%= booking.start_date %> to <%= booking.end_date %></p>
+              <p>Value per day: £<%= booking.offer.value %></p>
+            </div>
+            <%# <%= link_to "See details", booking_path(booking.id), class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+</div>

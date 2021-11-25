@@ -1,4 +1,4 @@
-<div class="form-new row justify-content-center">
+<div class="form-new row justify-content-center py-3">
   <div class="col-6">
     <h3>Add a session</h3>
     <%= simple_form_for @game_session do |f| %>
@@ -15,7 +15,7 @@
       <%= f.input :is_recurrent, :label => "Will this session be recurrent?" %>
       <%= f.input :capacity, :label => "Spaces available" %>
 
-      <%= f.submit "Create session", class: "btn btn-primary" %>
+      <%= f.submit "Create session", class: "btn btn-flat" %>
     <% end %>
   </div>
 </div>
