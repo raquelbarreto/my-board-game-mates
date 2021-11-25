@@ -16,6 +16,7 @@ class GamesController < ApplicationController
   def show
     authorize @game
     @game_reviews = GameReview.where(game: @game).order(created_at: :desc)
+    # @game_reviews = @game.game_reviews
     @review = GameReview.new
   end
 

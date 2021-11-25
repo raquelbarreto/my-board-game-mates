@@ -3,12 +3,12 @@ class GameReviewsController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
     @user = current_user
-    @game_review = GameReview.new(game_review_params)
-    @game_review.user = @user
-    @game_review.game = @game
-    authorize @game_review
-    @game_reviews = GameReview
-    if @game_review.save
+    @review= GameReview.new(game_review_params)
+    @review.user = @user
+    @review.game = @game
+    authorize @review
+    @game_reviews = GameReview.where(game: @game).order(created_at: :desc)
+    if @review.save
       redirect_to game_path(@game)
     else
       render "games/show"
