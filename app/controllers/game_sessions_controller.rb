@@ -7,7 +7,7 @@ class GameSessionsController < ApplicationController
         lat: game_session.latitude,
         lng: game_session.longitude,
         info_window: render_to_string(partial: "info_window", locals: { game_session: game_session }),
-        image_url: helpers.asset_url('marker')
+        image_url: helpers.image_url('marker.png')
       }
     end
   end
