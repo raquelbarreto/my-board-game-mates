@@ -1,4 +1,9 @@
 class LobbiesController < ApplicationController
+  def index
+    @lobbies = policy_scope(Lobby).order(created_at: :desc)
+    authorize @lobbies
+  end
+
   def create
     game_session = GameSession.find(params[:game_session_id])
 
