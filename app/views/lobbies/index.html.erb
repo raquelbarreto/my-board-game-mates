@@ -1,0 +1,23 @@
+<div class="container">
+  <% if @lobbies.empty? %>
+    <h3>Bummer! It doesn't seem that you have any session <strong>yet</strong>.</h3>
+    <%= link_to 'Find Session!', game_sessions_path, class: "btn btn-flat" %>
+  <% else %>
+
+    <h3 class="mt-4">Hi, <%= @lobbies.first.user.first_name %>!  These are your sessions:</h3>
+        <% @lobbies.each do |lobby| %>
+          <div class="card">
+          <% if lobby.game_session.photo.attached? %>
+            <%= cl_image_tag lobby.game_session.photo.key, height: 300, width: 400, crop: :fill %>
+          <% else %>
+          <% end %>
+
+          <h5><%= lobby.game_session.session_name %></h5>
+          <p><%= lobby.game_session.game.name %></p>
+          <p><%= lobby.game_session.date %></p>
+          <p><%= lobby.game_session.time %></p>
+          <%# <%= link_to "See details", game_session_path(game_session.id) %>
+          <% end %>
+      </div>
+  <% end %>
+</div>
