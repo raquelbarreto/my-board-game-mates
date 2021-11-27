@@ -2,24 +2,27 @@
 
   <div class="row">
     <div class="white-round-card d-flex flex-row col-sm-12">
-      <% if @game.photo.attached? %>
-        <%= cl_image_tag @game.photo.key, height: 300, width: 400, crop: :fill, class: "align-self-center" %>
+      <% if @recepient.photo.attached? %>
+        <%= cl_image_tag @recepient.photo.key, class: "avatar-large align-self-center mr-4" %>
       <% else %>
       <% end %>
       <div class="d-flex flex-column">
-        <div class="p-2"><h1><%= @game.name %></h1></div>
-        <div class="p-2 text-break text-justify"><%= @game.description %></div>
-        <div class="p-2">Category: <%= @game.category %></div>
-        <div class="p-2">Age rating: <%= @game.age_rating %></div>
-        <div class="p-2">Time: <%= @game.duration %></div>
-        <div class="p-2">Player count: <%= @game.player_count %></div>
+        <div class="p-2"> <h1><%= "#{@recepient.first_name} #{@recepient.last_name}" %> </h1> </div>
+        <div class="p-2 text-break text-justify">
+          <h4>
+            <i class="fas fa-lg fa-quote-left text-warning"></i>
+            <%= @recepient.about_me %>
+            <i class="fas fa-lg fa-quote-right text-warning"></i>
+          </h4>
+        </div>
+        <div class="p-2"><%= @recepient.age%> years old</div>
       </div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-sm-8 p-0">
-      <% @game_reviews.each do |review| %>
+      <% @recepient_reviews.each do |review| %>
         <div class="white-round-card p-4 my-3">
 
           <div class="review_title d-flex justify-content-start">
@@ -33,9 +36,9 @@
           </div>
 
           <div class="review_author d-flex justify-content-start mb-3">
-            <p class="align-self-center m-0 mr-2">by <%= link_to "#{review.user.first_name} #{review.user.last_name} ", user_path(review.user), class: "text-warning" %></p>
-            <% if review.user.photo.attached? %>
-              <%= cl_image_tag review.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <p class="align-self-center m-0 mr-2">by <%= link_to "#{review.author.first_name} #{review.author.last_name} ", user_path(review.author), class: "text-warning" %></p>
+            <% if review.author.photo.attached? %>
+              <%= cl_image_tag review.author.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% else %>
               <%= image_tag "standard_avatar.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
@@ -48,12 +51,12 @@
 
     <div class="col-sm-4">
       <div class="white-round-card p-4 my-3 sticky-top" id="review-card">
-        <h2 class="text-warning">Leave your review here!</h2>
-        <%= simple_form_for [@game, @review] do |f|%>
+        <h2 class="text-warning"><%= "How was #{@recepient.first_name}?" %></h2>
+        <%= simple_form_for [@recepient, @review] do |f|%>
           <%= f.input :title %>
           <%= f.input :content %>
-          <%= f.input :rating, collection: (1..5).to_a, label: "Rate this game" %>
-          <%= f.submit "Review Game!", class: "btn btn-flat" %>
+          <%= f.input :rating, collection: (1..5).to_a, label: "Rate this user" %>
+          <%= f.submit "Review user!", class: "btn btn-flat" %>
         <% end %>
       </div>
     </div>

@@ -4,6 +4,10 @@ const initStarRating = () => {
   $('#game_review_rating').barrating({
     theme: 'css-stars'
   });
+
+  $('#user_review_rating').barrating({
+    theme: 'css-stars'
+  });
 };
 
 export { initStarRating };
