@@ -21,5 +21,10 @@
   height: 300px;
   background-size: cover;
   background-position: center;
-  border-radius: 16px;
+  border-top-left-radius: 16px;
+  background: #fdb6a1 ;
+}
+
+.grid {
+  display: grid;
 }
