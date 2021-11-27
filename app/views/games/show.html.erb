@@ -1,14 +1,14 @@
 <div class="container">
 
   <div class="row">
-    <div class="card d-flex flex-row col-sm-12">
+    <div class="white-round-card d-flex flex-row col-sm-12">
       <% if @game.photo.attached? %>
-        <%= cl_image_tag @game.photo.key, height: 300, width: 400, crop: :fill %>
+        <%= cl_image_tag @game.photo.key, height: 300, width: 400, crop: :fill, class: "align-self-center" %>
       <% else %>
       <% end %>
       <div class="d-flex flex-column">
         <div class="p-2"><h1><%= @game.name %></h1></div>
-        <div class="p-2"><%= @game.description %></div>
+        <div class="p-2 text-break text-justify"><%= @game.description %></div>
         <div class="p-2">Category: <%= @game.category %></div>
         <div class="p-2">Age rating: <%= @game.age_rating %></div>
         <div class="p-2">Time: <%= @game.duration %></div>
@@ -23,7 +23,7 @@
         <div class="white-round-card p-4 my-3">
 
           <div class="review_title d-flex justify-content-start">
-            <h2 class="mr-3 text-warning"><%= review.title %> </h2>
+            <h2 class="mr-3 text-warning text-break"><%= review.title %> </h2>
             <% review.rating.times do %>
               <i class="fas fa-star  align-self-center text-warning"></i>
             <% end %>
@@ -33,35 +33,30 @@
           </div>
 
           <div class="review_author d-flex justify-content-start mb-3">
-            <p class="align-self-center m-0 mr-2">by <%= review.user.first_name %></p>
+            <p class="align-self-center m-0 mr-2">by <%= link_to "#{review.user.first_name} #{review.user.last_name} " , user_path(user) %></p>
             <% if review.user.photo.attached? %>
-              <%= cl_image_tag review.user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <%= cl_image_tag review.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% else %>
               <%= image_tag "standard_avatar.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
           </div>
 
-          <p class="m-0"><%= review.content %></p>
+          <p class="m-0 text-justify text-break"><%= review.content %></p>
         </div>
       <% end %>
     </div>
 
     <div class="col-sm-4">
-      <div class="white-round-card p-4 my-3">
+      <div class="white-round-card p-4 my-3 sticky-top" id="review-card">
         <h2 class="text-warning">Leave your review here!</h2>
         <%= simple_form_for [@game, @review] do |f|%>
           <%= f.input :title %>
           <%= f.input :content %>
           <%= f.input :rating, collection: (1..5).to_a, label: "Rate this game" %>
-          <%= f.submit "Review Game!", class: "btn btn-warning" %>
+          <%= f.submit "Review Game!", class: "btn btn-flat" %>
         <% end %>
       </div>
     </div>
   </div>
 </div>
-
-
-  <%= link_to 'Edit', edit_game_path(@game) %> |
-  <%= link_to 'Back', games_path %> |
-  <%= link_to 'Leave a review', new_game_game_review_path(@game) %>
 </div>

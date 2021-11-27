@@ -1,4 +1,4 @@
-<div class="banner" style="background-image:url(<%= image_path "banner1.png" %>)">
+<div class="banner p-0" style="background-image:url(<%= image_path "banner1.png" %>)">
   <div class="container">
     <h1>Find your <strong>board game</strong> mates.</h1>
     <p>Join a session, meet people and make friends!</p>
@@ -27,9 +27,10 @@
       </div>
     </div>
   </div>
-
+<% unless current_user.profile_complete? %>
   <div class="complete-perfil py-4">
     <h3 class="text-center">Complete your profile and keep playing</h1>
     <p class="py-2">Complete your profile to keep playing. <br> You can also check other peoples profiles and rate your experience with them. </p>
   </div>
+<% end %>
 </div>

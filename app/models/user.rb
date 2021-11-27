@@ -17,5 +17,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
   # validates :age, presence: true, numericality: { only_integer: true, greater_than: 0 }
   # validates :gender, inclusion: { in: %w[m f other] }
-
+  def profile_complete?
+    !about_me.nil? && !address.nil? && !age.nil? && !gender.nil?
+  end
 end
