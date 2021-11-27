@@ -15,6 +15,8 @@ class GameReviewsController < ApplicationController
     end
   end
 
+  private
+
   def game_review_params
     params.require(:game_review).permit(:title, :content, :rating)
   end
