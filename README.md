@@ -13,7 +13,7 @@ The following third party services are used by this app:
 
 This is a Ruby on Rails project. In order to run it locally, ensure you have installed:
 
-- Correct Ruby version (see [ruby-version](./.ruby-version))
+- Correct Ruby version (see [.ruby-version](./.ruby-version))
 - [PostgreSQL](https://www.postgresql.org/download/)
 
 ## Credentials
