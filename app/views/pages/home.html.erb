@@ -27,7 +27,7 @@
       </div>
     </div>
   </div>
-<% unless current_user.profile_complete? %>
+<% if !current_user.nil? && !current_user.profile_complete? %>
   <div class="complete-perfil py-4">
     <h3 class="text-center">Complete your profile and keep playing</h1>
     <p class="py-2">Complete your profile to keep playing. <br> You can also check other peoples profiles and rate your experience with them. </p>
