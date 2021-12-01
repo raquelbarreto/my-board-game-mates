@@ -1,18 +1,35 @@
 <div class="container">
   <div class="d-flex">
-    <div class="d-flex flex-column">
+    <div class="d-flex flex-column col-7">
       <% @game_sessions.each do |game_session| %>
-        <div class="session-card d-flex flex-row">
+        <div class="white-round-card d-flex flex-row mb-2">
           <% if game_session.photo.attached? %>
-            <%= cl_image_tag game_session.photo.key, height: 300, width: 300, crop: :fill %>
+            <%= cl_image_tag game_session.photo.key%>
           <% else %>
+            <%= cl_image_tag game_session.game.photo.key, height: 300, width: 400, crop: :fill, class: "align-self-center game-img" %>
           <% end %>
 
           <div class="d-flex flex-column">
             <div class="p-2"><%= link_to game_session.session_name, game_session_path(game_session.id) %></div>
-            <div class="p-2">What are we playing? <%= game_session.game.name %></div>
-            <div class="p-2">Where? <%= game_session.address  %></div>
-            <div class="p-2">Spaces available: <%= game_session.capacity  %></div>
+            <div class="p-2"><i class="fas fa-dice"></i> <%= game_session.game.name %></div>
+            <div class="p-2"><i class="fas fa-map-marker-alt"></i><%= game_session.address  %></div>
+            <div class="p-2 d-flex">
+              <%= game_session.capacity %>x<i class="fas fa-male"></i>
+              <% if game_session.is_smoke_free %>
+                <i class="fas fa-smoking-ban"></i>
+              <% else %>
+                <i class="fas fa-smoking"></i>
+              <% end %>
+
+              <% if game_session.has_drinks %>
+                <i class="fas fa-cocktail"></i>
+              <% end %>
+
+              <% if game_session.has_food %>
+                <i class="fas fa-utensils"></i>
+              <% end %>
+            </div>
+
           </div>
 
           <% if policy(game_session).destroy? %>
@@ -23,7 +40,7 @@
         </div>
       <% end %>
     </div>
-    <div id="map" class="round-border"
+    <div id="map" class="round-border col-5"
         style="width: 100%; height: 600px;"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">

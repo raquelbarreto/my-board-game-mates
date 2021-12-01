@@ -25,8 +25,9 @@
         </div>
         <div class="game-info py-4 px-4">
           <div class="p-2"><h5><%= game.name %></h5></div>
-          <div class="p-2">Category: <%= game.category %></div>
-          <div class="p-2"> <%= link_to "See this game", game_path(game.id), class: "btn btn-details" %></div>
+          <div class="p-2"> <%= game.category %></div>
+          <div class="p-2"> <%= link_to "Know more", game_path(game.id), class: "btn btn-details" %></div>
+          <div class="p-2"> <%= link_to "See open sessions", game_path(game.id), class: "btn btn-details" %></div>
         </div>
       </div>
     <% end %>

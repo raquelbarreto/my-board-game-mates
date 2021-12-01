@@ -7,6 +7,7 @@
   <p><%= @game_session.date %></p>
   <p><%= @game_session.time %></p>
   <p><%= @game_session.address %></p>
+  <p><%= @game_session.description %></p>
   <div class="col-6 form pb-4">
     <% if current_user.lobbies.where(game_session: @game_session).empty? %>
       <%= simple_form_for [@game_session, @lobby] do |f| %>
