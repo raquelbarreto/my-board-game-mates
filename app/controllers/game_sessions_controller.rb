@@ -30,9 +30,19 @@ class GameSessionsController < ApplicationController
 
   def show
     @game_session = GameSession.find(params[:id])
-    @user = current_user
-    @lobby = @user.lobbies.where(game_session: @game_session).first || Lobby.new
+    # @user = current_user
+    @user = @game_session.user
+    @lobby = Lobby.where(game_session: @game_session).first || Lobby.create
+    @markers = []
     authorize @game_session
+    @session_data =
+      {
+        lat: @game_session.latitude,
+        lng: @game_session.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { game_session: @game_session }),
+        image_url: helpers.image_url('marker.png')
+      }
+    @markers.append(@session_data)
   end
 
   def edit

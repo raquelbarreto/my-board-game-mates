@@ -1,42 +1,54 @@
 <div class="container">
-  <div class="d-flex">
-    <div class="d-flex flex-column col-7">
+  <h3 class="ml-4 mt-4 text-warning">Sessions</h3>
+  <p  class="ml-4 mb-4">Game sessions near you</p>
+  <div class="d-flex justify-content-between">
+    <div class="cards col-7">
       <% @game_sessions.each do |game_session| %>
-        <div class="white-round-card d-flex flex-row mb-2">
-          <% if game_session.photo.attached? %>
-            <%= cl_image_tag game_session.photo.key%>
-          <% else %>
-            <%= cl_image_tag game_session.game.photo.key, height: 300, width: 400, crop: :fill, class: "align-self-center game-img" %>
-          <% end %>
+        <div class="card d-flex flex-column mb-2">
+            <% if game_session.photo.attached? %>
+              <%= cl_image_tag game_session.photo.key, class: "game-img"%>
+            <% else %>
+              <%= cl_image_tag game_session.game.photo.key, class: "game-img" %>
+            <% end %>
 
           <div class="d-flex flex-column">
-            <div class="p-2"><%= link_to game_session.session_name, game_session_path(game_session.id) %></div>
-            <div class="p-2"><i class="fas fa-dice"></i> <%= game_session.game.name %></div>
-            <div class="p-2"><i class="fas fa-map-marker-alt"></i><%= game_session.address  %></div>
-            <div class="p-2 d-flex">
-              <%= game_session.capacity %>x<i class="fas fa-male"></i>
-              <% if game_session.is_smoke_free %>
-                <i class="fas fa-smoking-ban"></i>
-              <% else %>
-                <i class="fas fa-smoking"></i>
-              <% end %>
+            <div class="d-flex align-items-center p-2 text-warning" style="height: 100px; text-align: center;"><h6><%= game_session.session_name %></h6></div>
+            <div class="d-flex flex-column justify-content-between" style="height: 260px;">
+              <div class="font-weight-bold text-center"> <%= game_session.date.strftime("%A, %b %d") %></div>
+              <div class="pl-4"><i class="fas fa-dice"></i> <%= game_session.game.name %></div>
+              <div class="pl-4"><i class="fas fa-map-marker-alt"></i> <%= game_session.address  %></div>
+              <div class="p-1 pb-2 d-flex justify-content-around">
+                <div>
+                  <%= game_session.capacity %> <i class="fas fa-male"></i>
+                </div>
+                <% if game_session.is_smoke_free %>
+                  <i class="fas fa-smoking-ban"></i>
+                <% else %>
+                  <i class="fas fa-smoking"></i>
+                <% end %>
 
-              <% if game_session.has_drinks %>
-                <i class="fas fa-cocktail"></i>
-              <% end %>
+                <% if game_session.has_drinks %>
+                  <i class="fas fa-cocktail"></i>
+                <% end %>
 
-              <% if game_session.has_food %>
-                <i class="fas fa-utensils"></i>
-              <% end %>
+                <% if game_session.has_food %>
+                  <i class="fas fa-utensils"></i>
+                <% end %>
+              </div>
+
+              <div class="pb-4 px-4">
+                <%= link_to "See details", game_session_path(game_session.id), class: "btn btn-details" %>
+              </div>
             </div>
-
           </div>
 
-          <% if policy(game_session).destroy? %>
-            <%= link_to game_session_path(game_session), method: :delete, data: { confirm: "Are you sure you want to delete this offer?" } do %>
-              <button class = 'btn btn-danger'><i class="fas fa-trash-alt"></i></button>
+          <div class="btn-destroy">
+            <% if policy(game_session).destroy? %>
+              <%= link_to game_session_path(game_session), method: :delete, data: { confirm: "Are you sure you want to delete this session?" } do %>
+                <button class = 'btn btn-danger'><i class="fas fa-trash-alt"></i></button>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
       <% end %>
     </div>
