@@ -141,7 +141,8 @@ ticket_to_ride.photo.attach(io: file, filename: 'ticket_to_ride.jpg', content_ty
     has_drinks: [true, false].sample,
     has_food: [true, false].sample,
     capacity: game.player_count,
-    is_recurrent: [true, false].sample
+    is_recurrent: [true, false].sample,
+    description: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false)
   )
 end
 
