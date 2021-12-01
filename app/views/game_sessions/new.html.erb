@@ -7,6 +7,7 @@
       <%= f.input :address %>
       <%= f.input :date, as: :date %>
       <%= f.input :time, as: :time %>
+      <%= f.input :description %>
       <%= f.input :photo, as: :file %>
       <%= f.input :is_family_friendly, :label => "Family Friendly"%>
       <%= f.input :is_smoke_free, :label => "Smoke free"%>
@@ -14,6 +15,7 @@
       <%= f.input :has_drinks, :label => "Drinks" %>
       <%= f.input :is_recurrent, :label => "Will this session be recurrent?" %>
       <%= f.input :capacity, :label => "Spaces available" %>
+
 
       <%= f.submit "Create session", class: "btn btn-flat" %>
     <% end %>
