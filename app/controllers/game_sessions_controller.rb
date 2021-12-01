@@ -30,9 +30,7 @@ class GameSessionsController < ApplicationController
 
   def show
     @game_session = GameSession.find(params[:id])
-    # @user = current_user
-    @user = @game_session.user
-    @lobby = Lobby.where(game_session: @game_session).first || Lobby.create
+    @lobby = Lobby.where(game_session: @game_session, user: current_user).first || Lobby.create
     @markers = []
     @availability = @game_session.capacity - @game_session.lobbies.count
     authorize @game_session

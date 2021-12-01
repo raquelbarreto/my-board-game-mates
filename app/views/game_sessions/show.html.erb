@@ -17,7 +17,7 @@
       </div>
   <div class="d-flex justify-content-between">
     <div class="d-flex flex-column col-7">
-      <div class="card d-flex flex-column justify-content-between">
+      <div class="card mb-4 d-flex flex-column justify-content-betweent">
         <% if @game_session.photo.attached? %>
           <%= cl_image_tag @game_session.photo.key, class: "session-img" %>
         <% else %>
@@ -27,6 +27,19 @@
         <div class="px-4">
           <h5 class="my-3">Details</h5>
           <p><%= @game_session.description%></p>
+        </div>
+      </div>
+      <div class="card d-flex flex-column justify-content-between">
+        <div class="px-4">
+          <h5 class="my-3">Attendees</h5>
+          <% @game_session.lobbies.each do |lobby| %>
+            <% if lobby.user.photo.attached? %>
+              <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% else %>
+              <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <% end %>
+            <%= lobby.user.first_name %>
+          <% end %>
         </div>
       </div>
     </div>
