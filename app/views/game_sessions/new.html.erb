@@ -5,7 +5,7 @@
       <%= f.input :game_id, collection: Game.all %>
       <%= f.input :session_name %>
       <%= f.input :address %>
-      <%= f.input :date, as: :date %>
+      <%= f.input :date, as: :date, html5: true %>
       <%= f.input :time, as: :time %>
       <%= f.input :description %>
       <%= f.input :photo, as: :file %>
