@@ -1,7 +1,5 @@
 <div class="container">
-  <div class="d-flex justify-content-between">
-    <div class="d-flex flex-column col-7">
-      <div class="card d-flex flex-column my-4">
+  <div class="card d-flex flex-column my-4">
         <h3 class="m-4 text-center"><%= @game_session.session_name %></h3>
         <div class="d-flex justify-content-center">
           <div class="ml-0 mt-1">
@@ -17,38 +15,51 @@
           </div>
         </div>
       </div>
-
+  <div class="d-flex justify-content-between">
+    <div class="d-flex flex-column col-7">
       <div class="card d-flex flex-column justify-content-between">
         <% if @game_session.photo.attached? %>
           <%= cl_image_tag @game_session.photo.key, class: "session-img" %>
         <% else %>
+          <%= cl_image_tag @game_session.game.photo.key, class: "session-img" %>
         <% end %>
 
         <div class="px-4">
           <h5 class="my-3">Details</h5>
-          <p><%= @game_session.date.strftime("%A, %b %d")%></p>
-          <p><%= @game_session.time.strftime("%l:%M %p")%></p>
-          <p><%= @game_session.address %></p>
-        </div>
-
-        <div class="form px-4 pb-4">
-          <% if current_user.lobbies.where(game_session: @game_session).empty? %>
-            <%= simple_form_for [@game_session, @lobby] do |f| %>
-            <%= f.submit "Ask to join", class: "btn btn-flat" %>
-            <% end %>
-          <% else %>
-            <%= link_to game_session_lobby_path(@game_session, @lobby), method: :delete, data: { confirm: "Are you sure you want to leave this game session?" } do %>
-              <button class = 'btn btn-flat'>Leave</button>
-            <% end %>
-          <% end %>
+          <p><%= @game_session.description%></p>
         </div>
       </div>
     </div>
 
-    <div id="map" class="flex-column round-border my-4 col-5"
-        style="width: 100%; height: 600px;"
-        data-markers="<%= @markers.to_json %>"
-        data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+    <div class="d-flex flex-column round-border col-5">
+      <div class="card p-4">
+        <div class="d-flex font-weight-bold">
+          <p><%= @game_session.date.strftime("%A, %b %d")%></p>
+          <p class="px-1">@</p>
+          <p><%= @game_session.time.strftime("%l:%M %p")%></p>
+        </div>
+        <p><i class="fas fa-map-marker-alt"></i> <%= @game_session.address %></p>
+        <div class="d-flex justify-content-between">
+          <p><%= @availability%> spots left</p>
+          <div class="form px-4 pb-4">
+            <% if current_user.lobbies.where(game_session: @game_session).empty? %>
+              <%= simple_form_for [@game_session, @lobby] do |f| %>
+              <%= f.submit "Attend", class: "btn btn-flat" %>
+              <% end %>
+            <% else %>
+              <%= link_to game_session_lobby_path(@game_session, @lobby), method: :delete, data: { confirm: "Are you sure you want to leave this game session?" } do %>
+                <button class = 'btn btn-flat'>Leave</button>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div id="map" class="round-border my-4"
+          style="width: 100%; height: 600px;"
+          data-markers="<%= @markers.to_json %>"
+          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
+      </div>
     </div>
   </div>
 </div>

@@ -34,6 +34,7 @@ class GameSessionsController < ApplicationController
     @user = @game_session.user
     @lobby = Lobby.where(game_session: @game_session).first || Lobby.create
     @markers = []
+    @availability = @game_session.capacity - @game_session.lobbies.count
     authorize @game_session
     @session_data =
       {
