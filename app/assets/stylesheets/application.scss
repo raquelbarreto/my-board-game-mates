@@ -37,3 +37,7 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
   padding-top: 16px;
 }
+
+.content-height {
+  min-height: calc(100vh - 180px);
+}
