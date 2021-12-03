@@ -33,13 +33,15 @@
         <div class="px-4">
           <h5 class="my-3">Attendees</h5>
           <% @game_session.lobbies.each do |lobby| %>
-            <% if lobby.user.photo.attached? %>
-              <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <% else %>
-              <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <% end %>
-            <%= lobby.user.first_name %>
-          <% end %>
+            <div class="d-flex">
+              <% if lobby.user.photo.attached? %>
+                <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% else %>
+                <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% end %>
+              <%= lobby.user.first_name %>
+            </div>
+              <% end %>
         </div>
       </div>
     </div>
