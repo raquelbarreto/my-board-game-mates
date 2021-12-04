@@ -14,7 +14,7 @@
         <div class="p-2"><i class="fas fa-hourglass-half"></i>  Time: <%= @game.duration %> min.</div>
         <div class="p-2"><i class="fas fa-male"></i>  Player count: <%= @game.player_count %></div>
       </div>
-      <div> <%= link_to "See open sessions", game_sessions_path, class: "btn btn-details", id: "session-button" %></div>
+      <div> <%= link_to "See open sessions", game_sessions_path(query: "#{@game.name}" ), class: "btn btn-details", id: "session-button" %></div>
     </div>
   </div>
 

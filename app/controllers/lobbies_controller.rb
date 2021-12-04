@@ -33,4 +33,13 @@ class LobbiesController < ApplicationController
     @lobby.delete
     redirect_to game_session_path(game_session)
   end
+
+  def accept
+    @lobby = Lobby.find(params[:id])
+    @lobby.accepted = true
+    authorize @lobby
+    if @lobby.save
+      redirect_to game_session_path(@lobby.game_session)
+    end
+  end
 end

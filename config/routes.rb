@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   end
   resources :game_sessions do
     resources :lobbies, only: [:new, :create, :destroy]
+
   end
 
   resources :lobbies, only: [:index]
+  patch "lobbies/:id/accept", to: "lobbies#accept", as: :accept
 end

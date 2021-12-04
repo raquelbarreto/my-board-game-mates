@@ -29,7 +29,8 @@ class GameSessionsController < ApplicationController
     @game_session.user = current_user
     authorize @game_session
     if @game_session.save
-      redirect_to game_sessions_path
+      Lobby.create(game_session: @game_session, user: current_user, accepted: true)
+      redirect_to game_session_path(@game_session)
     else
       render :new
     end
@@ -39,7 +40,7 @@ class GameSessionsController < ApplicationController
     @game_session = GameSession.find(params[:id])
     @lobby = Lobby.where(game_session: @game_session, user: current_user).first || Lobby.new
     @markers = []
-    @availability = @game_session.capacity - @game_session.lobbies.count
+    @availability = @game_session.capacity - @game_session.lobbies.where(accepted: true).count
     authorize @game_session
     @session_data =
       {
