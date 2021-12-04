@@ -129,12 +129,14 @@ ticket_to_ride.photo.attach(io: file, filename: 'ticket_to_ride.jpg', content_ty
   user = User.find(User.pluck(:id).sample)
   game = Game.find(Game.pluck(:id).sample)
   apostrophe = user.first_name.end_with?("s") ? "'" : "'s"
+  date = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now)
+  time = "20:00".to_datetime
   GameSession.create!(
     session_name: "#{user.first_name}#{apostrophe} #{game.name} night!",
     user: user,
     game: game,
-    time: "20:00",
-    date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
+    start_time: "20:00",
+    date: date,
     address: user.address,
     is_smoke_free: [true, false].sample,
     is_family_friendly: [true, false].sample,
@@ -142,7 +144,8 @@ ticket_to_ride.photo.attach(io: file, filename: 'ticket_to_ride.jpg', content_ty
     has_food: [true, false].sample,
     capacity: game.player_count,
     is_recurrent: [true, false].sample,
-    description: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false)
+    description: Faker::Lorem.paragraph_by_chars(number: 256, supplemental: false),
+    starts_at: DateTime.new(date.year, date.month, date.day, time.hour, time.minute, time.second, 0)
   )
 end
 

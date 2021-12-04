@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_01_000326) do
+ActiveRecord::Schema.define(version: 2021_12_04_011254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_000326) do
 
   create_table "game_sessions", force: :cascade do |t|
     t.date "date"
-    t.time "time"
+    t.time "start_time"
     t.string "address"
     t.float "latitude"
     t.float "longitude"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2021_12_01_000326) do
     t.bigint "user_id", null: false
     t.bigint "game_id", null: false
     t.text "description"
+    t.datetime "starts_at"
     t.index ["game_id"], name: "index_game_sessions_on_game_id"
     t.index ["user_id"], name: "index_game_sessions_on_user_id"
   end

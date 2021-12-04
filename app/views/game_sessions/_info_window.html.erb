@@ -1,4 +1,4 @@
 <h2><%= game_session.session_name %></h2>
 <p><%= game_session.address %></p>
-<p><%= game_session.time %></p>
+<p><%= game_session.start_time %></p>
 <%= button_to "Check it out!", game_session_path(game_session), method: :get, class: "btn btn-flat" %>
