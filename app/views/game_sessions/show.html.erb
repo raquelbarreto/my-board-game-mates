@@ -33,21 +33,53 @@
         <h5 class="pt-4 pl-4">Attendees</h5>
         <div class="pb-4 pl-4">
           <% @game_session.lobbies.each do |lobby| %>
-            <div class="d-flex py-2">
-              <div>
-                <% if lobby.user.photo.attached? %>
-                  <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                <% else %>
-                  <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-                <% end %>
+            <% if lobby.accepted %>
+              <div class="d-flex py-2">
+                <div>
+                  <% if lobby.user.photo.attached? %>
+                    <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                  <% else %>
+                    <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                  <% end %>
+                </div>
+                <div class="d-flex align-items-center pl-1">
+                  <%= link_to "#{lobby.user.first_name} #{lobby.user.last_name} ", user_path(lobby.user), class: "text-warning" %>
+                </div>
               </div>
-              <div class="d-flex align-items-center pl-1">
-                <%= link_to "#{lobby.user.first_name} #{lobby.user.last_name} ", user_path(lobby.user), class: "text-warning" %>
-              </div>
-            </div>
-              <% end %>
+            <% end %>
+          <% end %>
         </div>
       </div>
+      <% if current_user == @game_session.user %>
+        <div class="card d-flex flex-column justify-content-between mt-4">
+          <h5 class="pt-4 pl-4">Pending attendees</h5>
+          <div class="pb-4 pl-4">
+            <% @game_session.lobbies.each do |lobby| %>
+              <% if !lobby.accepted %>
+                <div class="d-flex py-2">
+                  <div>
+                    <% if lobby.user.photo.attached? %>
+                      <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% else %>
+                      <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                    <% end %>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between px-4 w-100">
+                    <div>
+                      <%= link_to "#{lobby.user.first_name} #{lobby.user.last_name} ", user_path(lobby.user), class: "text-warning" %>
+                    </div>
+                    <div>
+                      <%= simple_form_for lobby, url: accept_path(lobby), method: :patch do |f| %>
+                        <%= f.submit "Approve", class: "btn btn-flat" %>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
 
     <div class="d-flex flex-column round-border col-5">
@@ -59,11 +91,11 @@
         </div>
         <p><i class="fas fa-map-marker-alt"></i> <%= @game_session.address %></p>
         <div class="d-flex justify-content-between">
-          <p><%= @availability%> spots left</p>
+          <p><%= @availability %> spots left</p>
           <div class="form px-4 pb-4">
             <% if current_user.lobbies.where(game_session: @game_session).empty? %>
               <%= simple_form_for [@game_session, @lobby] do |f| %>
-              <%= f.submit "Attend", class: "btn btn-flat" %>
+                <%= f.submit "Ask to join", class: "btn btn-flat" %>
               <% end %>
             <% else %>
               <%= link_to game_session_lobby_path(@game_session, @lobby), method: :delete, data: { confirm: "Are you sure you want to leave this game session?" } do %>

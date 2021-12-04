@@ -17,4 +17,8 @@ class LobbyPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def accept?
+    true
+  end
+
 end
