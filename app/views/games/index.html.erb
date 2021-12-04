@@ -34,7 +34,7 @@
         <div class="game-info px-4 pb-4 d-flex flex-column">
           <div class="my-2 text text-warning text-center"><%= link_to game.name, game_path(game.id), class: "text text-warning" %></div>
           <div class="badge badge-warning py-1 px-1 my-2 mx-auto <%= game.category %>"> <%= game.category %></div>
-          <div> <%= link_to "See open sessions", game_sessions_path, class: "btn btn-details" %></div>
+          <div> <%= link_to "See open sessions", game_sessions_path(query: "#{game.name}" ), class: "btn btn-details" %></div>
         </div>
       </div>
     <% end %>
