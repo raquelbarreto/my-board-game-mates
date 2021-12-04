@@ -3,7 +3,7 @@ class GameSessionsController < ApplicationController
     if params[:query].present?
       @game_sessions = policy_scope(GameSession).joins(:game).where("games.name ILIKE ?", "%#{params[:query]}%")
     else
-      @game_sessions = policy_scope(GameSession).order(created_at: :desc)
+      @game_sessions = policy_scope(GameSession).order(date: :asc)
     end
 
     @markers = @game_sessions.geocoded.map do |game_session|
