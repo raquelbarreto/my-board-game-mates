@@ -19,10 +19,10 @@
       <%= submit_tag "Search", class: "btn btn-flat" %>
     </div>
     <% end %>
-  </div> 
+  </div>
 
 
-  <div class="d-flex flex-wrap justify-content-between mb-4 py-2">
+  <div class="game-cards justify-content-between mb-4 py-2">
     <% @games.each do |game| %>
       <div class="card d-flex justify-content-between flex-column mb-4" style="width: 250px;">
         <% if game.photo.attached? %>

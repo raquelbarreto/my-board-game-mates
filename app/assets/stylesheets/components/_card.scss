@@ -1,10 +1,21 @@
 .cards {
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 10px;
   margin-bottom: 30px;
   margin-right: 10px;
 }
+
+.game-cards {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-bottom: 30px;
+  margin-right: 10px;
+}
+
 
 .card {
   // width: 250px;
@@ -17,6 +28,7 @@
 }
 
 .game-img {
+  object-fit: cover;
   height: 120px;
   width: auto;
   background-size: cover;
@@ -24,10 +36,11 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   background: #fdb6a1 ;
+  min-height: 200px;
 }
 
 .session-img {
-  height: 300px;
+  height: auto;
   width: auto;
   background-size: cover;
   background-position: center;
