@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(version: 2021_12_01_000326) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
-    t.boolean "is_smoke_free"
-    t.boolean "is_family_friendly"
-    t.boolean "has_drinks"
-    t.boolean "has_food"
+    t.boolean "is_smoke_free", null: false
+    t.boolean "is_family_friendly", null: false
+    t.boolean "has_drinks", null: false
+    t.boolean "has_food", null: false
     t.integer "capacity"
     t.boolean "is_recurrent"
     t.datetime "created_at", precision: 6, null: false
