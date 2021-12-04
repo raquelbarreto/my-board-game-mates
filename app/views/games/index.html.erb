@@ -8,9 +8,11 @@
         class: "form-control",
         placeholder: "Search for a game"
       %>
+    </div>
+    <div>
       <%= select_tag :game_category,
         options_for_select(Game::CATEGORIES, params[:game_category]),
-        include_blank:"any",
+        include_blank:"Any",
         class: "form-control",
         placeholder: "Search for a category"
       %>
