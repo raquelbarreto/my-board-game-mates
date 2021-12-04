@@ -50,8 +50,8 @@
       <div class="card p-4">
         <div class="d-flex font-weight-bold">
           <p><%= @game_session.date.strftime("%A, %b %d")%></p>
+          <p class="px-1">@</p>
           <p><%= @game_session.start_time.strftime("%l:%M %p")%></p>
-          <p><%= @game_session.address %></p>
         </div>
         <p><i class="fas fa-map-marker-alt"></i> <%= @game_session.address %></p>
         <div class="d-flex justify-content-between">
