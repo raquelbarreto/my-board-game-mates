@@ -3,17 +3,23 @@
   <div class="search d-flex align-items-center p-3">
     <div class="w-25">
       <%= form_tag games_path, method: :get do %>
-      <%= text_field_tag :query,
-        params[:query],
+      <%= text_field_tag :game_name,
+        params[:game_name],
         class: "form-control",
         placeholder: "Search for a game"
+      %>
+      <%= select_tag :game_category,
+        options_for_select(Game::CATEGORIES, params[:game_category]),
+        include_blank:"any",
+        class: "form-control",
+        placeholder: "Search for a category"
       %>
     </div>
     <div class="pl-3">
       <%= submit_tag "Search", class: "btn btn-flat" %>
     </div>
     <% end %>
-  </div>
+  </div> 
 
 
   <div class="d-flex flex-wrap justify-content-between mb-4 py-2">

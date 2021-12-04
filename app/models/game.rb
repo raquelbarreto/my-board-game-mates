@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-
+  CATEGORIES = ["Strategy", "Adventure", "Family"]
   # Associations
   has_many :game_sessions, dependent: :destroy
   has_many :game_reviews, dependent: :destroy
