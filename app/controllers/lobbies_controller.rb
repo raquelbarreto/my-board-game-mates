@@ -2,6 +2,9 @@ class LobbiesController < ApplicationController
   def index
     @lobbies = policy_scope(Lobby).order(created_at: :desc)
     authorize @lobbies
+
+    # For a monthly view:
+    @sessions = GameSession.joins(:lobbies).where(starts_at: Date.today.beginning_of_month.beginning_of_week.. Date.today.end_of_month.end_of_week, lobbies:{user: current_user})
   end
 
   def create

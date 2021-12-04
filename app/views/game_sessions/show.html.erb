@@ -27,7 +27,7 @@
         <div class="px-4">
           <h5 class="my-3">Details</h5>
           <p><%= @game_session.date.strftime("%A, %b %d")%></p>
-          <p><%= @game_session.time.strftime("%l:%M %p")%></p>
+          <p><%= @game_session.start_time.strftime("%l:%M %p")%></p>
           <p><%= @game_session.address %></p>
         </div>
 
