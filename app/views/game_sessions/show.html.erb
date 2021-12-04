@@ -9,7 +9,7 @@
               <%= image_tag "standard_avatar.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
           </div>
-          <div class="ml-1">
+          <div class="ml-1 d-flex flex-column align-items-center">
             <p class="mb-0">Hosted by:</p>
             <p> <%= link_to "#{@game_session.user.first_name} #{@game_session.user.last_name} ", user_path(@game_session.user), class: "text-warning" %></p>
           </div>
@@ -30,16 +30,20 @@
         </div>
       </div>
       <div class="card d-flex flex-column justify-content-between">
-        <div class="px-4">
-          <h5 class="my-3">Attendees</h5>
+        <h5 class="pt-4 pl-4">Attendees</h5>
+        <div class="pb-4 pl-4">
           <% @game_session.lobbies.each do |lobby| %>
-            <div class="d-flex">
-              <% if lobby.user.photo.attached? %>
-                <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-              <% else %>
-                <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-              <% end %>
-              <%= lobby.user.first_name %>
+            <div class="d-flex py-2">
+              <div>
+                <% if lobby.user.photo.attached? %>
+                  <%= cl_image_tag lobby.user.photo.key, class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                <% else %>
+                  <%= image_tag "default_user_photo.jpg", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+                <% end %>
+              </div>
+              <div class="d-flex align-items-center pl-1">
+                <%= link_to "#{lobby.user.first_name} #{lobby.user.last_name} ", user_path(lobby.user), class: "text-warning" %>
+              </div>
             </div>
               <% end %>
         </div>
