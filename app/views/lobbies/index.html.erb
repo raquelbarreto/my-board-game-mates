@@ -5,27 +5,29 @@
       <h3>Bummer! It doesn't seem that you have any session <strong>yet</strong>.</h3>
       <%= link_to 'Find Session!', game_sessions_path, class: "btn btn-flat" %>
     <% else %>
-      <h3 class="mt-4">Hi, <%= @lobbies.first.user.first_name %>!  These are your upcoming sessions:</h3>
+      <h2 class="m-4 text-center text-warning font-weight-bold">Hi, <%= @lobbies.first.user.first_name %>!  These are your upcoming sessions:</h2>
   </div>
 
   <div class="d-flex">
     <div class="d-flex flex-column col-5">
       <% @lobbies.each do |lobby| %>
-        <div class="card">
+        <div class="card mb-2">
           <% if lobby.game_session.photo.attached? %>
             <%= cl_image_tag lobby.game_session.photo.key, class: "session-img" %>
           <% else %>
             <%= cl_image_tag lobby.game_session.game.photo.key, class: "session-img" %>
           <% end %>
-          <div class="p-4">
-            <h5 class="pb-4"><%= lobby.game_session.session_name %></h5>
-            <p><%= lobby.game_session.game.name %></p>
-            <div class="d-flex">
+          <div class="px-4 py-2">
+            <div class="d-flex font-weight-bold justify-content-center">
               <p><%= lobby.game_session.date.strftime("%A, %b %d") %></p>
               <p class="px-1">@</p>
               <p><%= lobby.game_session.start_time.strftime("%l:%M %p") %></p>
             </div>
+            <h5 class="pb-2 font-weight-bold"><%= link_to lobby.game_session.session_name, game_session_path(lobby.game_session.id), class: "text text-warning" %></h5>
+            <p><i class="fas fa-dice"></i> <%= link_to lobby.game_session.game.name, game_path(lobby.game_session.game), class: "text text-warning"  %></p>
+            <p><i class="fas fa-map-marker-alt"></i> <%= lobby.game_session.address %></p>
           </div>
+
         </div>
           <% end %>
       <% end %>

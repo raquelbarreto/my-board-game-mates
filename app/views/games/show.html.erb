@@ -7,7 +7,7 @@
       <% else %>
       <% end %>
       <div class="d-flex flex-column pl-3">
-        <div class="p-2 text text-warning"><h1><%= @game.name %></h1></div>
+        <div class="p-2 text text-warning"><h2 class="font-weight-bold"><%= @game.name %></h2></div>
         <div class="p-2 text-break text-justify mr-4"><%= @game.description %></div>
         <div class="p-2"><i class="fas fa-chess"></i>  Category: <%= @game.category %></div>
         <div class="p-2"><i class="fas fa-child"></i>  Age rating: <%= @game.age_rating %></div>

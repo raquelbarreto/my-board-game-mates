@@ -1,22 +1,22 @@
 <div class="form-new row justify-content-center py-3">
   <div class="col-6">
-    <h3>Add a session</h3>
+    <h2 class="m-4 text-center text-warning font-weight-bold">Create session</h2>
     <%= simple_form_for @game_session do |f| %>
       <%= f.input :game_id, collection: Game.all %>
       <%= f.input :session_name %>
-      <%= f.input :address %>
-      <%= f.input :date, as: :date, html5: true %>
-      <%= f.input :start_time, as: :time %>
       <%= f.input :description %>
-      <%= f.input :photo, as: :file %>
+      <%= f.input :address %>
+      <div class="d-flex">
+        <%= f.input :date, as: :date, html5: true %>
+        <%= f.input :start_time, as: :time %>
+      </div>
       <%= f.input :is_family_friendly, :label => "Family Friendly"%>
       <%= f.input :is_smoke_free, :label => "Smoke free"%>
       <%= f.input :has_food, :label => "Food" %>
       <%= f.input :has_drinks, :label => "Drinks" %>
-      <%= f.input :is_recurrent, :label => "Will this session be recurrent?" %>
+      <%= f.input :is_recurrent, :label => "Recurrent (E.g.: weekly or monthly)" %>
       <%= f.input :capacity, :label => "Spaces available" %>
-
-
+      <%= f.input :photo, as: :file %>
       <%= f.submit "Create session", class: "btn btn-flat" %>
     <% end %>
   </div>

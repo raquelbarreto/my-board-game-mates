@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card d-flex flex-column my-4">
-        <h3 class="m-4 text-center"><%= @game_session.session_name %></h3>
+        <h2 class="m-4 text-center text-warning font-weight-bold"><%= @game_session.session_name %></h2>
         <div class="d-flex justify-content-center">
           <div class="ml-0 mt-1">
             <% if @game_session.user.photo.attached? %>
@@ -24,9 +24,10 @@
           <%= cl_image_tag @game_session.game.photo.key, class: "session-img" %>
         <% end %>
 
-        <div class="px-4">
+        <div class="pb-4 pl-4">
           <h5 class="my-3">Details</h5>
           <p><%= @game_session.description%></p>
+          <div><i class="fas fa-dice"></i> <%= link_to @game_session.game.name, game_path(@game_session.game), class: "text text-warning" %></div>
         </div>
       </div>
       <div class="card d-flex flex-column justify-content-between">
