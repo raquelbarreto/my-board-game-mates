@@ -10,8 +10,9 @@
         <%= f.input :date, as: :date, html5: true %>
         <%= f.input :start_time, as: :time %>
       </div>
-      <%= f.input :is_family_friendly, :label => "Family Friendly"%>
-      <%= f.input :is_smoke_free, :label => "Smoke free"%>
+      <p>Additional info:</p>
+      <%= f.input :is_family_friendly, :label => "Family Friendly" %>
+      <%= f.input :is_smoke_free, :label => "Smoke free", class: "fas fa-smoking-ban" %>
       <%= f.input :has_food, :label => "Food" %>
       <%= f.input :has_drinks, :label => "Drinks" %>
       <%= f.input :is_recurrent, :label => "Recurrent (E.g.: weekly or monthly)" %>

@@ -24,7 +24,7 @@
           <%= cl_image_tag @game_session.game.photo.key, class: "session-img" %>
         <% end %>
 
-        <div class="pb-4 pl-4">
+        <div class="pb-4 px-4">
           <h5 class="my-3">Details</h5>
           <p><%= @game_session.description%></p>
           <div><i class="fas fa-dice"></i> <%= link_to @game_session.game.name, game_path(@game_session.game), class: "text text-warning" %></div>
