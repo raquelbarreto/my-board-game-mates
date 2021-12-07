@@ -1,35 +1,39 @@
 <div class="container">
 
+  <div class="card d-flex flex-column my-4 ">
+    <% if @lobbies.empty? %>
+      <h3>Bummer! It doesn't seem that you have any session <strong>yet</strong>.</h3>
+      <%= link_to 'Find Session!', game_sessions_path, class: "btn btn-flat" %>
+    <% else %>
+      <h2 class="m-4 text-center text-warning font-weight-bold">Hi, <%= @lobbies.first.user.first_name %>!  These are your upcoming sessions:</h2>
+  </div>
+
   <div class="d-flex">
-    <div class="col-4 ">
-      <% if @lobbies.empty? %>
-        <h3>Bummer! It doesn't seem that you have any session <strong>yet</strong>.</h3>
-        <%= link_to 'Find Session!', game_sessions_path, class: "btn btn-flat" %>
-      <% else %>
-
-        <h3 class="mt-4">Hi, <%= @lobbies.first.user.first_name %>!  These are your upcoming sessions:</h3>
-            <% @lobbies.each do |lobby| %>
-              <div class="card d-flex justify-content-between mb-4">
-              <div>
-                <% if lobby.game_session.photo.attached? %>
-                  <%= cl_image_tag lobby.game_session.photo.key, height: 300, width: 400, crop: :fill %>
-                <% else %>
-                  <%= cl_image_tag lobby.game_session.game.photo.key, height: 300, width: 400, crop: :fill %>
-                <% end %>
-              </div>
-
-              <div>
-                <h5><%= lobby.game_session.session_name %></h5>
-                <p><%= lobby.game_session.game.name %></p>
-                <p><%= lobby.game_session.date %></p>
-                <p><%= lobby.game_session.start_time %></p>
-                <%# <%= link_to "See details", game_session_path(game_session.id) %>
-              </div>
+    <div class="d-flex flex-column col-5">
+      <% @lobbies.each do |lobby| %>
+        <div class="card mb-2">
+          <% if lobby.game_session.photo.attached? %>
+            <%= cl_image_tag lobby.game_session.photo.key, class: "session-img" %>
+          <% else %>
+            <%= cl_image_tag lobby.game_session.game.photo.key, class: "session-img" %>
+          <% end %>
+          <div class="px-4 py-2">
+            <div class="d-flex font-weight-bold justify-content-center">
+              <p><%= lobby.game_session.date.strftime("%A, %b %d") %></p>
+              <p class="px-1">@</p>
+              <p><%= lobby.game_session.start_time.strftime("%l:%M %p") %></p>
+            </div>
+            <h5 class="pb-2 font-weight-bold"><%= link_to lobby.game_session.session_name, game_session_path(lobby.game_session.id), class: "text text-warning" %></h5>
+            <p><i class="fas fa-dice"></i> <%= link_to lobby.game_session.game.name, game_path(lobby.game_session.game), class: "text text-warning"  %></p>
+            <p><i class="fas fa-map-marker-alt"></i> <%= lobby.game_session.address %></p>
           </div>
-        <% end %>
+
+        </div>
+          <% end %>
       <% end %>
     </div>
-    <div class="col-8">
+
+    <div class="col-7">
       <div class="p-4 my-3 sticky-top" id="review-card">
         <%= month_calendar(events: @sessions, attribute: :starts_at)  do |date, date_sessions| %>
           <%= date %>
@@ -45,8 +49,9 @@
               <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
               </div>
             </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>

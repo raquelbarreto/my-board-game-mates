@@ -74,6 +74,6 @@ class GameSessionsController < ApplicationController
   private
 
   def game_session_params
-    params.require(:game_session).permit(:photo, :game_id, :session_name, :date, :start_time, :address, :is_smoke_free, :is_family_friendly, :has_drinks, :has_food, :capacity, :is_recurrent)
+    params.require(:game_session).permit(:description, :photo, :game_id, :session_name, :date, :start_time, :address, :is_smoke_free, :is_family_friendly, :has_drinks, :has_food, :capacity, :is_recurrent)
   end
 end

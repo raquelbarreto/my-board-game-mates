@@ -1,16 +1,19 @@
 <div class="container">
+  <div><h2 class="pl-3 pt-4 text text-warning font-weight-bold">Games</h2></div>
 
   <div class="search d-flex align-items-center p-3">
-    <div class="w-25">
+    <div class="w-25 mr-1">
       <%= form_tag games_path, method: :get do %>
       <%= text_field_tag :game_name,
         params[:game_name],
         class: "form-control",
         placeholder: "Search for a game"
       %>
+    </div>
+    <div>
       <%= select_tag :game_category,
         options_for_select(Game::CATEGORIES, params[:game_category]),
-        include_blank:"any",
+        include_blank:"Category: all",
         class: "form-control",
         placeholder: "Search for a category"
       %>
@@ -30,9 +33,9 @@
         <% else %>
         <% end %>
         <div class="game-info px-4 pb-4 d-flex flex-column">
-          <div class="my-2 text text-warning text-center"><%= link_to game.name, game_path(game.id), class: "text text-warning" %></div>
+          <div class="my-2 text text-warning text-center"><h5><%= link_to game.name, game_path(game.id), class: "text text-warning" %></h5></div>
           <div class="badge badge-warning py-1 px-1 my-2 mx-auto <%= game.category %>"> <%= game.category %></div>
-          <div> <%= link_to "See open sessions", game_sessions_path, class: "btn btn-details" %></div>
+          <div> <%= link_to "See open sessions", game_sessions_path(query: "#{game.name}" ), class: "btn btn-details" %></div>
         </div>
       </div>
     <% end %>
