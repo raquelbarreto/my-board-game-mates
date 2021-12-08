@@ -10,11 +10,12 @@
         <%= f.input :date, as: :date, html5: true %>
         <%= f.input :start_time, as: :time %>
       </div>
-      <%= f.input :is_family_friendly, :label => "Family Friendly"%>
-      <%= f.input :is_smoke_free, :label => "Smoke free"%>
-      <%= f.input :has_food, :label => "Food" %>
-      <%= f.input :has_drinks, :label => "Drinks" %>
-      <%= f.input :is_recurrent, :label => "Recurrent (E.g.: weekly or monthly)" %>
+      <p>Additional info:</p>
+      <%= f.input :is_family_friendly, label: ('<i class="fa fa-child" aria-hidden="true"></i> Family Friendly').html_safe %>
+      <%= f.input :is_smoke_free, label: ('<i class="fas fa-smoking-ban"></i> Smoke Free').html_safe %>
+      <%= f.input :has_food, label: ('<i class="fas fa-utensils"></i> Food').html_safe %>
+      <%= f.input :has_drinks, label: ('<i class="fas fa-cocktail"></i> Drinks').html_safe %>
+      <%= f.input :is_recurrent, label: ('<i class="fa fa-calendar" aria-hidden="true"></i> Recurrent (E.g.: weekly or monthly)').html_safe %>
       <%= f.input :capacity, :label => "Spaces available" %>
       <%= f.input :photo, as: :file %>
       <%= f.submit "Create session", class: "btn btn-flat" %>
