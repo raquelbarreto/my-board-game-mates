@@ -38,19 +38,33 @@
         <%= month_calendar(events: @sessions, attribute: :starts_at)  do |date, date_sessions| %>
           <%= date %>
           <% date_sessions.each do |session| %>
-            <div class="dropdown mb-2 px-2">
-              <button class="btn btn-secondary session vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-dice"></i>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="font-weight-bold text-center px-4"> <%= session.session_name%></div>
-              <div class="px-4"><i class="fas fa-dice"></i> <%= link_to session.game.name, game_path(session.game), class: "text text-warning" %></div>
-              <div class="px-4"><i class="fas fa-map-marker-alt"></i> <%= session.address  %></div>
-              <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
+            <% if current_user == session.user %>
+              <div class="dropdown mb-2 px-2">
+                <button class="btn btn-secondary my-session vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-dice"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="font-weight-bold text-center px-4"> <%= link_to session.session_name, game_session_path(session.id), class: "text text-warning" %></div>
+                <div class="px-4"><i class="fas fa-dice"></i> <%= link_to session.game.name, game_path(session.game), class: "text text-warning" %></div>
+                <div class="px-4"><i class="fas fa-map-marker-alt"></i> <%= session.address  %></div>
+                <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
+                </div>
               </div>
-            </div>
+              <% else %>
+              <div class="dropdown mb-2 px-2">
+                <button class="btn btn-secondary session vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-dice"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div class="font-weight-bold text-center px-4"> <%= link_to session.session_name, game_session_path(session.id), class: "text text-warning" %></div>
+                <div class="px-4"><i class="fas fa-dice"></i> <%= link_to session.game.name, game_path(session.game), class: "text text-warning" %></div>
+                <div class="px-4"><i class="fas fa-map-marker-alt"></i> <%= session.address  %></div>
+                <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
+                </div>
+              </div>
             <% end %>
           <% end %>
+        <% end %>
         </div>
       </div>
     </div>

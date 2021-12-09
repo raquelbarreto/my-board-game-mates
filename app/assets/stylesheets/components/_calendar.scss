@@ -14,7 +14,8 @@
 .session {
   color: white;
   border-radius: 16px;
-  background: $blue;
+  border: 1px solid #03989e;
+  background: #03989e;
   transition: background 0.3s ease;
   font-size: small;
   height: 30px;
@@ -22,6 +23,54 @@
 }
 
 .session:hover {
-  background: $orange;
+  background: #5ce1e6;
+  border: 1px solid #5ce1e6;
   color: black;
+}
+
+.my-session {
+  color: white;
+  border-radius: 16px;
+  border: 1px solid $orange;
+  background: $orange;
+  transition: background 0.3s ease;
+  font-size: small;
+  height: 30px;
+  width: 70px;
+}
+
+.my-session:hover {
+  background: #ffba52;
+  border: 1px solid #ffba52;
+  color: black;
+}
+
+.btn-calendar {
+  background: #03989e;
+  color: white;
+  padding: 8px 24px;
+  border-radius: $border-radius;
+  border: 1px solid #03989e;
+  transition: background 0.3s ease;
+}
+
+.btn-calendar:hover {
+  background: #038c9e;
+  border-color: #038c9e;
+  color: white;
+}
+
+.btn-calendar-a {
+  background: white;
+  color: #03989e;
+  padding: 8px 24px;
+  border-radius: $border-radius;
+  border: 1px solid #03989e;
+  transition: background 0.3s ease;
+}
+
+.btn-calendar-a:hover {
+  background: #038c9e;
+  border-color: #038c9e;
+  color: white;
 }
