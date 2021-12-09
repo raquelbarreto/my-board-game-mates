@@ -39,15 +39,21 @@
           <%= date %>
           <% date_sessions.each do |session| %>
             <div class="dropdown mb-2 px-2">
-              <button class="btn btn-secondary session vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-dice"></i>
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div class="font-weight-bold text-center px-4"> <%= session.session_name%></div>
-              <div class="px-4"><i class="fas fa-dice"></i> <%= link_to session.game.name, game_path(session.game), class: "text text-warning" %></div>
-              <div class="px-4"><i class="fas fa-map-marker-alt"></i> <%= session.address  %></div>
-              <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
-              </div>
+              <% if session.user == current_user %>
+                <button class="btn btn-secondary session-red vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-dice"></i>
+                </button>
+              <% else %>
+                <button class="btn btn-secondary session vertical-align-middle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-dice"></i>
+                </button>
+            <% end %>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <div class="font-weight-bold text-center px-4"> <%= session.session_name%></div>
+                  <div class="px-4"><i class="fas fa-dice"></i> <%= link_to session.game.name, game_path(session.game), class: "text text-warning" %></div>
+                  <div class="px-4"><i class="fas fa-map-marker-alt"></i> <%= session.address  %></div>
+                  <div class="px-4"><i class="fas fa-clock"></i> <%= session.start_time.strftime("%H:%M") %></div>
+                </div>
             </div>
             <% end %>
           <% end %>
