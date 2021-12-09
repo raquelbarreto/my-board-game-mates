@@ -14,7 +14,7 @@
 .session {
   color: white;
   border-radius: 16px;
-  background: $blue;
+  background: #03989e;
   transition: background 0.3s ease;
   font-size: small;
   height: 30px;
@@ -22,6 +22,30 @@
 }
 
 .session:hover {
-  background: $orange;
+  background: #d9e476;
   color: black;
+}
+
+.my-session {
+  color: white;
+  border-radius: 16px;
+  background: $orange;
+  transition: background 0.3s ease;
+  font-size: small;
+  height: 30px;
+  width: 70px;
+}
+
+.my-session:hover {
+  background: #d0ad2d;
+  color: black;
+}
+
+.btn-calendar {
+  background: #03989e;
+  color: white;
+  padding: 8px 24px;
+  border-radius: $border-radius;
+  border: 1px solid #03989e;
+  transition: background 0.3s ease;
 }
